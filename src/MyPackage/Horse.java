@@ -5,4 +5,6 @@ public class Horse implements HorseLike {
     public String ride() {
         return "cantering";
     }
+
+    public void eat() {};
 }
