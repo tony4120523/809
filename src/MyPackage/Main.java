@@ -1,8 +1,13 @@
 package MyPackage;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.IntFunction;
+import java.util.function.IntUnaryOperator;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,17 +33,42 @@ public class Main {
 
 
         // 測試 findFirst()，找到符合的就不繼續往下找
-        List<String> str = Arrays.asList("my", "pen", "is", "your", "pen");
-        Predicate<String> test = s -> {
-            int i = 0;
-            boolean result = s.contains("pen");
-            System.out.print(i++ + " : ");
-            return result;
-        };
-        str.stream()
-                .filter(test)
-                .findFirst()
-                .ifPresent(System.out::print);
+        // List<String> str = Arrays.asList("my", "pen", "is", "your", "pen");
+        // Predicate<String> test = s -> {
+        //     int i = 0;
+        //     boolean result = s.contains("pen");
+        //     System.out.print(i++ + " : ");
+        //     return result;
+        // };
+        // str.stream()
+        //         .filter(test)
+        //         .findFirst()
+        //         .ifPresent(System.out::print);
 
+
+        // 測試 AutoCloseable, try-catch；
+        // try 可以不配 catch；main 可以 throws Exception，相當於不處理 Exception
+        // 不然就在這裡用 catch 處理
+        // try (Folder f = new Folder()) {
+        //     f.open();
+        // } catch (Exception e) { }
+
+
+        // 測試 IntFunction，應改成下面那樣
+        // IntStream stream = IntStream.of(1, 2, 3);
+        // IntFunction<Integer> inFu = x -> y -> x * y; // line n1
+        // IntStream newStream = stream.map(inFu.apply(10)); // line n2
+        // newStream.forEach(System.out::print);
+        // IntStream stream = IntStream.of(1, 2, 3);
+        // IntFunction<IntUnaryOperator> inFu = x -> (y -> x - y); // line n1，兩層的運算
+        // IntStream newStream = stream.map(inFu.apply(10)); // line n2，x 代入 10, y 分別代入 123
+        // newStream.forEach(System.out::print); // 結果為 '987'
+
+
+        // 測試 Comparator.comparing
+        List<Integer> nums = Arrays.asList(10, 20, 8);
+        System.out.println (
+                nums.stream().max(Comparator.comparing(a -> a))
+        );
     }
 }
