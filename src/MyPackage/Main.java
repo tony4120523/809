@@ -65,10 +65,17 @@ public class Main {
         // newStream.forEach(System.out::print); // 結果為 '987'
 
 
-        // 測試 Comparator.comparing
-        List<Integer> nums = Arrays.asList(10, 20, 8);
-        System.out.println (
-                nums.stream().max(Comparator.comparing(a -> a))
-        );
+        // 測試 Comparator.comparing, result: Optional[20]
+        // List<Integer> nums = Arrays.asList(10, 20, 8);
+        // System.out.println (
+        //         nums.stream().max(Comparator.comparing(a -> a))
+        // );
+
+
+        // 測試子類別放入 Array 的方式, result: java.lang.ArrayStoreException: MyPackage.BaseTwo
+        Base[] baseArr = new BaseOne[3]; /* new Base[3]; compiles and result: 3 */
+        baseArr[0] = new BaseOne();
+        baseArr[2] = new BaseTwo();
+        System.out.println(baseArr.length);
     }
 }
