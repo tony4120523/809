@@ -1,6 +1,7 @@
 package MyPackage;
 
 public enum USCurrency {
+    // most declare on the top!!
     PENNY(1),
     NICKLE(5),
     DIME(10),
